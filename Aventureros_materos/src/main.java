@@ -1,5 +1,4 @@
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class main {
@@ -15,27 +14,37 @@ public class main {
 
 	public static int seleccionarCebador(int N, int[] a) {
 
-		List<Integer> ronda = new LinkedList<>();
-		List<Integer> eliminados = new LinkedList<>();
-		for (int i = 1; i <= N; i++)
-			ronda.add(i);
+		int[] izq = new int[N + 1];
+		int[] der = new int[N + 1];
+		List<Integer> eliminados = new ArrayList<>();
+		for (int i = 1; i <= N; i++) {
+			izq[i] = (i == 1) ? N : i - 1;
+			der[i] = (i == N) ? 1 : i + 1;
+		}
 
-		int pos = 0;
+		int actual = 1;
+
+		int siguenEnRonda = N;
 
 		for (int i = 0; i < N - 1; i++) {
-			int pasos = a[i] % ronda.size();
-			pos = (pos + pasos) % ronda.size();
-			eliminados.add(ronda.get(pos));
-			ronda.remove(pos);
-			if (pos == ronda.size())
-				pos = 0;
-		}
-		for (Integer eliminado : eliminados) {
-			System.out.print(eliminado + " ");
+			int pasos = a[i] % siguenEnRonda;
+			for (int j = 0; j < pasos; j++) {
+				actual = der[actual];
+			}
 
+			eliminados.add(actual);
+
+			der[izq[actual]] = der[actual];
+			izq[der[actual]] = izq[actual];
+
+			actual = der[actual];
+			siguenEnRonda--;
 		}
-		System.out.println();
-		return ronda.get(0);
+
+		System.out.println("Eliminados: " + eliminados);
+
+		return actual;
+
 	}
 
 }
