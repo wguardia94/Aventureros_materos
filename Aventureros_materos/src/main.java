@@ -16,7 +16,9 @@ public class main {
 
 		int[] izq = new int[N + 1];
 		int[] der = new int[N + 1];
+		
 		List<Integer> eliminados = new ArrayList<>();
+		
 		for (int i = 1; i <= N; i++) {
 			izq[i] = (i == 1) ? N : i - 1;
 			der[i] = (i == N) ? 1 : i + 1;
