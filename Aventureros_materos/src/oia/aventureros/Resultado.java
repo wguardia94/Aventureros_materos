@@ -1,12 +1,14 @@
 package oia.aventureros;
 
+import java.util.Arrays;
+
 public class Resultado {
 	final private int cebador;
 	final private int[] eliminados;
 	
 	public Resultado(int cebador, int[] eliminados) {
 		this.cebador = cebador;
-		this.eliminados = eliminados;
+		this.eliminados = Arrays.copyOf(eliminados, eliminados.length);
 	}
 	
 	public int getCebador() {

@@ -8,28 +8,29 @@ import java.io.IOException;
 
 public class Archivos {
 
-	public static DatosEntrada leerArchivo(String direccionArchivo) {
+	public static DatosEntrada leerArchivo(String direccionArchivo) throws Exception {
 		try (BufferedReader br = new BufferedReader(new FileReader(direccionArchivo))) {
-
 			// Primera línea -> cantidad de OIA
 			int n = Integer.parseInt(br.readLine().trim());
-
+	
 			// Segunda línea -> pasajes
 			String[] partes = br.readLine().trim().split("\\s+");
 			long[] pasajes = new long[n - 1];
-
 			for (int i = 0; i < n - 1; i++) {
-				pasajes[i] = Integer.parseInt(partes[i]);
+				pasajes[i] = Long.parseLong(partes[i]);
 			}
 
 			return new DatosEntrada(n, pasajes);
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
+			throw e;
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+			throw e;
 		}
-		return null;
 	}
 
-	public static void escribirArchivo(String direccionArchivo, Resultado resultado) {
+	public static void escribirArchivo(String direccionArchivo, Resultado resultado) throws IOException {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(direccionArchivo))) {
 
 			// Primera línea: eliminados
@@ -46,6 +47,7 @@ public class Archivos {
 			bw.newLine();
 		} catch (IOException e) {
 			System.err.println("Error al escribir el archivo: " + e.getMessage());
+			throw e;
 		}
 	}
 }

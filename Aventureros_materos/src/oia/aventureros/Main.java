@@ -1,31 +1,38 @@
 package oia.aventureros;
+import java.util.Random;
 
 public class Main {
 
 	public static void main(String[] args) {
-		/*
-		// sin archivos
-		int N = 5;
-		long[] a = { 1, 2, 3, 4 };
-		Resultado resultado = SeleccionarCebador.seleccionarCebador(N, a);
-		System.out.println(resultado);
-
-		//con archivos
-		DatosEntrada datos = Archivos.leerArchivo("./casosDePrueba/casoNormal.txt");
-		resultado = SeleccionarCebador.seleccionarCebador(datos.getN(), datos.getPasajes());
-		Archivos.escribirArchivo("./casosDePrueba/resultados/resultadoCasoNormal.txt", resultado);
-		*/
 		
-		// sin archivos
-		int N = 5;
-		long[] a = { 1, 2, 3, 4 };
-		Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(N, a);
-		System.out.println(resultado);
-
+		int N = 400000;
+		long[] a = new long[N-1];
+		Random random = new Random();
+		int max = 100000000;
+		for (int i = 0; i < a.length; i++) {
+			a[i] = random.nextLong(max + 1);
+		}
+		try {
+			DatosEntrada datos = new DatosEntrada(N, a);
+			Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos);
+			System.out.println(resultado);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return;
+		}
+		 
+		
 		//con archivos
-		DatosEntrada datos = Archivos.leerArchivo("./casosDePrueba/casoNormal.txt");
-		resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos.getN(), datos.getPasajes());
-		Archivos.escribirArchivo("./casosDePrueba/resultados/resultadoCasoNormal.txt", resultado);
+		/*
+		try {
+			DatosEntrada datos = Archivos.leerArchivo("./casosDePrueba/casoNormal.txt");
+			Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos);
+			Archivos.escribirArchivo("./casosDePrueba/resultados/resultadoCasoNormal.txt", resultado);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return;
+		}
+		*/
 	}
 
 }
