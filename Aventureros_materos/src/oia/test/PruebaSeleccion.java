@@ -25,6 +25,21 @@ public class PruebaSeleccion {
 	    }
 	 	
 	 	@Test
+	    public void pruebaEliminacionSecuencial() {
+			int n = 5;
+			long[] pasajes = {0, 0, 0, 0};
+	        DatosEntrada datos = new DatosEntrada(n, pasajes);
+
+	        Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos);
+
+	        int[] esperadosEliminados = {1, 2, 3, 4};
+	        int esperadoCebador = 5;
+
+	        Assert.assertArrayEquals(resultado.getEliminados(), esperadosEliminados);
+	        Assert.assertEquals(resultado.getCebador(), esperadoCebador);
+	    }
+	 	
+	 	@Test
 	    public void pruebaCantidadAventurerosFueraDeRango() {
 			int n = 450000;
 			long[] pasajes = new long[n - 1];
