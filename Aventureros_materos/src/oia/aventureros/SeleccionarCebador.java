@@ -8,7 +8,7 @@ public class SeleccionarCebador {
 		int siguenEnRonda = datos.getN();
 		
 		for (int i = 0; i < datos.getN() - 1; i++) {
-			long pasaje = datos.getPasaje(i) % siguenEnRonda;
+			long pasaje = datos.getPasaje(i) % siguenEnRonda;//para saltearse el dar vueltas enteras a la ronda
 			int aventureroRetirar = (int)((actual + pasaje) % siguenEnRonda);
 			int nroAventurero = aventureros.realizarPasaje(aventureroRetirar);
 			

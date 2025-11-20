@@ -1,38 +1,27 @@
 package oia.aventureros;
-import java.util.Random;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		int N = 400000;
-		long[] a = new long[N-1];
-		Random random = new Random();
-		int max = 100000000;
-		for (int i = 0; i < a.length; i++) {
-			a[i] = random.nextLong(max + 1);
-		}
+
+		String ruta = "./casosDePrueba/casoNormal.txt";
+		// String ruta = "./casosDePrueba/casoSecuencial.txt";
+		// String ruta = "./casosDePrueba/casoLimite.txt";
+		// String ruta = "./casosDePrueba/casoError.txt";
 		try {
-			DatosEntrada datos = new DatosEntrada(N, a);
+			DatosEntrada datos = Archivos.leerArchivo(ruta);
 			Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos);
-			System.out.println(resultado);
+			Path path = Paths.get(ruta);
+			String nombreArchivo = path.getFileName().toString();
+			Archivos.escribirArchivo("./casosDePrueba/resultados/resultado_" + nombreArchivo, resultado);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return;
 		}
-		 
-		
-		//con archivos
-		/*
-		try {
-			DatosEntrada datos = Archivos.leerArchivo("./casosDePrueba/casoNormal.txt");
-			Resultado resultado = SeleccionarCebador.seleccionarCebadorSegmentTree(datos);
-			Archivos.escribirArchivo("./casosDePrueba/resultados/resultadoCasoNormal.txt", resultado);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			return;
-		}
-		*/
+
 	}
 
 }

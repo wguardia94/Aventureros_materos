@@ -15,6 +15,10 @@ public class Archivos {
 	
 			// Segunda línea -> pasajes
 			String[] partes = br.readLine().trim().split("\\s+");
+			if (partes.length != n - 1) {
+	            throw new IllegalArgumentException("Se esperaban " + (n - 1) + 
+	                                                " argumentos, pero se encontraron " + partes.length + ".");
+	        }
 			long[] pasajes = new long[n - 1];
 			for (int i = 0; i < n - 1; i++) {
 				pasajes[i] = Long.parseLong(partes[i]);
@@ -25,7 +29,7 @@ public class Archivos {
 			System.err.println("Error al leer el archivo: " + e.getMessage());
 			throw e;
 		} catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
+			System.err.println("Error al leer el archivo: "+e.getMessage());
 			throw e;
 		}
 	}

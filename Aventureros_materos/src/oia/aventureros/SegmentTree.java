@@ -18,8 +18,7 @@ public class SegmentTree {
         	this.tamaño *= 2;
         }
         this.arbol = new int[2 * this.tamaño];
-        
-        
+               
         //construimos el arbol, todos los aventureros (hojas) vivos
         for (int i = 0; i < n; i++) {
         	this.arbol[this.tamaño + i] = 1;
@@ -51,7 +50,8 @@ public class SegmentTree {
             } else {
                 nroAventurero -= this.arbol[2 * nodo];
                 nodo = 2 * nodo + 1;
-            }
+           
+           }
         }
         return nodo - tamaño;
     }
